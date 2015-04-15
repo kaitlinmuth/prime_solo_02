@@ -1,0 +1,12 @@
+body {
+	background-color: rgb(154,195,215);
+	padding: 10px;
+}
+li{
+	margin: 10px;
+	text-align: center;
+	color: white;
+	font-size: 25px;
+	font-family: 'Helvetica', sans-serif;
+	list-style-type: none;
+}

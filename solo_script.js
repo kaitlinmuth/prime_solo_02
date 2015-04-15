@@ -20,9 +20,18 @@ for(var i = 0; i < array.length; i++){
 // Bug #1 -- need to make sure we are modifying the INTERIOR arrays, not the external array of arrays
   	array[i] = calculateSTI(array[i]);
    	newEl = document.createElement('li');
-  	newText = document.createTextNode(array[i]);
+  	newText = document.createTextNode(prettify(array[i]));
   	newEl.appendChild(newText);
   	position.appendChild(newEl);
+}
+
+function prettify(array){
+  var prettyString = "";
+  for (var i =0; i<array.length-1; i++){
+    prettyString += array[i] + ", ";
+  }
+  prettyString += array[array.length-1];
+  return prettyString;
 }
 
 function calculateSTI(array){
