@@ -16,11 +16,13 @@ position = document.getElementById('content');
 //Loop the array, extracting each array and writing information to the DOM
 //Note that the information is not 'clean'
 for(var i = 0; i < array.length; i++){
-	array[i] = calculateSTI(array);
- 	newEl = document.createElement('li');
-	newText = document.createTextNode(array[i]);
-	newEl.appendChild(newText);
-	position.appendChild(newEl);
+
+// Bug #1 -- need to make sure we are modifying the INTERIOR arrays, not the external array of arrays
+  	array[i] = calculateSTI(array[i]);
+   	newEl = document.createElement('li');
+  	newText = document.createTextNode(array[i]);
+  	newEl.appendChild(newText);
+  	position.appendChild(newEl);
 }
 
 function calculateSTI(array){
@@ -38,8 +40,9 @@ function calculateSTI(array){
   }
 
   newArray[1] = bonus;
-  newArray[2] = baseSalary * (1.0 + bonus);
-  newArray[3] = baseSalary * bonus;
+// Bug #2 -- Need to round to the nearest dollar!
+  newArray[2] = Math.round(100 * baseSalary * (1.0 + bonus)) / 100;
+  newArray[3] = Math.round(baseSalary * bonus);
   console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
   return newArray;
 }
@@ -63,7 +66,8 @@ function getBaseSTI(reviewScore){
       basePercent = 0.10;
       break;
   }
-  return basePercent - 1;
+//Mistake #3 -- Why was this subtracting 1??
+  return basePercent;
 }
 
 function getYearAdjustment(employeeNumber){
